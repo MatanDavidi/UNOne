@@ -308,6 +308,8 @@ public class Game {
         shuffleDeck();
 
         discarded.clear();
+        
+        discard(1);
 
     }
 
