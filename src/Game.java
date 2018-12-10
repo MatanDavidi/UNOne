@@ -268,6 +268,8 @@ public class Game {
 
             discarded.add(0, drew);
 
+            currentColor = drew.getColor();
+
         }
 
         return drew;
