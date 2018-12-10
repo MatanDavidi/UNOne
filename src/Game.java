@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import javax.swing.JFrame;
 
 /*
  * Copyright (C) 2018 Matan Davidi
@@ -53,11 +52,9 @@ public class Game {
     private UserInputThreadPanel waitForUserInput;
 
     //private UNOFrame frame;
-
     public int getPlayersCount() {
-        
+
         return playersCount;
-        
 
     }
 
@@ -237,12 +234,6 @@ public class Game {
             nextPlayer();
 
         }
-        
-        for (Hand player : players) {
-            
-            System.out.println("Player " + player.getName() + " has " + player.getCardsNumber() + " cards.");
-            
-        }
 
     }
 
@@ -329,68 +320,77 @@ public class Game {
     }
 
     private void movePlayer(Hand player, Card card) {
+        
+        if (canPlay(player)) {
 
-        System.out.println("Turn " + turns + ": Player " + player.getName() + " is playing a card");
+            if (player.getCards().contains(card)) {
 
-        if (player.getCards().contains(card)) {
+                System.out.println("Turn " + turns + ": Player " + player.getName() + " is playing a card");
 
-            player.removeCard(card);
-            discarded.add(0, card);
-            currentColor = card.getColor();
+                player.removeCard(card);
+                discarded.add(0, card);
+                currentColor = card.getColor();
 
-            if (card.getEffect() != null) {
+                if (card.getEffect() != null) {
 
-                switch (card.getEffect()) {
+                    switch (card.getEffect()) {
 
-                    case ChangeColor:
-                        changeColor();
-                        break;
+                        case ChangeColor:
+                            changeColor();
+                            break;
 
-                    case Draw2:
-                        draw(player, 2);
-                        break;
+                        case Draw2:
+                            draw(player, 2);
+                            break;
 
-                    case Draw4ChangeColor:
-                        draw(player, 4);
-                        changeColor();
-                        break;
+                        case Draw4ChangeColor:
+                            draw(player, 4);
+                            changeColor();
+                            break;
 
-                    case InvertOrder:
-                        invertOrder();
-                        break;
+                        case InvertOrder:
+                            invertOrder();
+                            break;
 
-                    case Stop:
-                        nextPlayer();
-                        break;
+                        case Stop:
+                            nextPlayer();
+                            break;
+
+                    }
+
+                }
+
+                System.out.println("next player");
+                nextPlayer();
+                ++turns;
+
+                Hand winPlayer = checkWin();
+
+                if (deck.isEmpty()) {
+
+                    discardedToDeck();
+
+                }
+
+                if (winPlayer != null) {
+
+                    winningPlayer = winPlayer;
 
                 }
 
             }
 
-            nextPlayer();
-            ++turns;
-
-            Hand winPlayer = checkWin();
-
-            if (deck.isEmpty()) {
-
-                discardedToDeck();
-
-            }
-
-            if (winPlayer != null) {
-
-                winningPlayer = winPlayer;
-
-            }
-
+        } else {
+            
+            draw(player, 1);
+            
         }
 
     }
 
     public void movePlayer(Card card) {
 
-        System.out.println(currentPlayer);
+        //System.out.println(currentPlayer);
         movePlayer(players[currentPlayer], card);
 
     }
@@ -441,14 +441,17 @@ public class Game {
 
     private void nextPlayer() {
 
+        System.out.println("Incremental: " + incrementalOrder);
+        System.out.println("Before: " + currentPlayer);
+
         if (incrementalOrder) {
 
-            if (currentPlayer < playersCount - 2) {
+            if (currentPlayer < playersCount - 1) {
 
                 ++currentPlayer;
 
             } else {
-                
+
                 currentPlayer = 0;
 
             }
@@ -466,6 +469,8 @@ public class Game {
             }
 
         }
+
+        System.out.println("After: " + currentPlayer);
 
     }
 
@@ -493,12 +498,31 @@ public class Game {
         }
 
         //frame.remove(waitForUserInput);
-
     }
 
     private void invertOrder() {
-        
+
+        System.out.println("Invert");
         incrementalOrder = !incrementalOrder;
+
+    }
+
+    private boolean canPlay(Hand player) {
+        
+        boolean canPlay = false;
+        
+        for (Card card : player.getCards()) {
+            
+            if (isCardPlayable(card)) {
+                
+                canPlay = true;
+                break;
+                
+            }
+            
+        }
+        
+        return canPlay;
         
     }
 
