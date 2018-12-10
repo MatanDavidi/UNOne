@@ -338,7 +338,7 @@ public class Game {
 
             if (player.getCards().contains(card)) {
 
-                System.out.println("Turn " + turns + ": Player " + player.getName() + " is playing a card");
+                System.out.println("Turn " + turns + ": Player " + player.getName() + " is playing a " + card);
 
                 player.removeCard(card);
                 discarded.add(0, card);
