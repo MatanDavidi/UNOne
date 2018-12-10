@@ -1,3 +1,5 @@
+
+
 /*
  * Copyright (C) 2018 Matan Davidi
  *
@@ -33,8 +35,6 @@ public class Test {
         } while (g.getWinningPlayer() == null);
 
         System.out.println("The winner is " + g.getWinningPlayer().getName() + "!");
-        return;
-
     }
 
 }
