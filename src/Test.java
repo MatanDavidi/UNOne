@@ -43,5 +43,17 @@ public class Test {
 
         System.out.println("The winner is " + g.getWinningPlayer().getName() + "!");
     }
+    
+    private static void createPlayers() {
+
+        System.out.println("Adding the players to the game");
+
+        for (int i = 0; i < g.getPlayersCount(); ++i) {
+
+            g.addPlayer(new Hand(new ArrayList<>(), "Player " + (i + 1)));
+
+        }
+
+    }
 
 }
