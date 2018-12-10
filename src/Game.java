@@ -456,18 +456,23 @@ public class Game {
 
     private void nextPlayer() {
 
-        System.out.println("Incremental: " + incrementalOrder);
-        System.out.println("Before: " + currentPlayer);
+        currentPlayer = getNextPlayerIndex();
+
+    }
+
+    private int getNextPlayerIndex() {
+
+        int newPlayer;
 
         if (incrementalOrder) {
 
             if (currentPlayer < playersCount - 1) {
 
-                ++currentPlayer;
+                newPlayer = currentPlayer + 1;
 
             } else {
 
-                currentPlayer = 0;
+                newPlayer = 0;
 
             }
 
