@@ -80,11 +80,11 @@ public class Card {
 
     }
 
-    public Card(int numero, Color colore, CardEffect effetto) {
+    public Card(int number, Color color, CardEffect effect) {
 
-        this.number = numero;
-        this.color = colore;
-        this.effect = effetto;
+        this.number = number;
+        this.color = color;
+        this.effect = effect;
 
     }
 
