@@ -95,7 +95,31 @@ public class Card {
     @Override
     public String toString() {
 
-        return color.toString() + number;
+        String colorString;
+        
+        if (color.equals(Color.YELLOW)) {
+            
+            colorString = "yellow";
+            
+        } else if (color.equals(Color.RED)) {
+            
+            colorString = "red";
+            
+        } else if (color.equals(Color.GREEN)) {
+            
+            colorString = "green";
+            
+        } else if (color.equals(Color.BLUE)) {
+            
+            colorString = "blue";
+            
+        } else {
+            
+            colorString = "black";
+            
+        }
+        
+        return (colorString + " " + number + " with a " + effect + " effect");
 
     }
 
