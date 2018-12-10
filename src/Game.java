@@ -296,19 +296,23 @@ public class Game {
 
     private void discardedToDeck() {
 
-        deck.clear();
+        if (deck.isEmpty() && !discarded.isEmpty()) {
 
-        for (int i = 0; i < discarded.size(); ++i) {
+            deck.clear();
 
-            deck.add(discarded.get(discarded.size() - (i + 1)));
+            for (int i = 0; i < discarded.size(); ++i) {
+
+                deck.add(discarded.get(discarded.size() - (i + 1)));
+
+            }
+
+            shuffleDeck();
+
+            discarded.clear();
+
+            discard(1);
 
         }
-
-        shuffleDeck();
-
-        discarded.clear();
-        
-        discard(1);
 
     }
 
