@@ -383,8 +383,6 @@ public class Game {
 
         }
 
-        int handsCards = 0;
-
         ++turns;
         nextPlayer();
 
