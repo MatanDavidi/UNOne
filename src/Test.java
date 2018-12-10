@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+
+
 
 /*
  * Copyright (C) 2018 Matan Davidi
@@ -24,9 +27,13 @@
  */
 public class Test {
 
+    private static Game g;
+    
     public static void main(String[] args) {
 
-        Game g = new Game(4);
+        g = new Game(4);
+        
+        createPlayers();
 
         do {
 
