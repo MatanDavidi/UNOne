@@ -1,0 +1,505 @@
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import javax.swing.JFrame;
+
+/*
+ * Copyright (C) 2018 Matan Davidi
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+ /* 
+ *
+ * @author Matan Davidi
+ * @version 3-dic-2018
+ */
+public class Game {
+
+    private final List<Card> deck;
+
+    private final List<Card> discarded;
+
+    private int playersCount;
+
+    private final Hand[] players;
+
+    private int turns;
+
+    private final int STARTING_CARDS_NUMBER = 7;
+
+    private int currentPlayer;
+
+    private Hand winningPlayer;
+
+    private Color currentColor;
+
+    private boolean incrementalOrder = true;
+
+    private UserInputThreadPanel waitForUserInput;
+
+    //private UNOFrame frame;
+
+    public int getPlayersCount() {
+        
+        return playersCount;
+        
+
+    }
+
+    private void setPlayersCount(int playersCount) {
+
+        if (playersCount > 1) {
+
+            System.out.println("Setting players count to " + playersCount);
+            this.playersCount = playersCount;
+
+        } else {
+
+            this.playersCount = 2;
+
+        }
+
+    }
+
+    public Hand getWinningPlayer() {
+
+        return winningPlayer;
+
+    }
+
+    /**
+     * Creates a new game
+     *
+     * @param playersCount the number of players that will be playing
+     */
+    public Game(int playersCount) {
+
+        setPlayersCount(playersCount);
+        this.deck = new ArrayList<>();
+        this.discarded = new ArrayList<>();
+        this.players = new Hand[this.playersCount];
+        turns = 0;
+        currentPlayer = (int) (Math.random() * 3);
+        winningPlayer = null;
+        waitForUserInput = new UserInputThreadPanel();
+        //frame = new UNOFrame();
+
+        startGame();
+
+    }
+
+    private void fillDeck() {
+
+        System.out.println("Filling the deck");
+
+        deck.clear();
+
+        //Add all colored cards (4 colors)
+        for (int i = 0; i < 4; ++i) {
+
+            Color color;
+
+            switch (i) {
+
+                case 0:
+                    color = Color.YELLOW;
+                    break;
+
+                case 1:
+                    color = Color.RED;
+                    break;
+
+                case 2:
+                    color = Color.GREEN;
+                    break;
+
+                default:
+                    color = Color.BLUE;
+                    break;
+
+            }
+
+            //Add numerical cards (0-9) and special cards (10-15)
+            for (int j = 0; j < 16; ++j) {
+
+                int num = j;
+
+                CardEffect ce;
+
+                switch (j) {
+
+                    case 10:
+                    case 11:
+                        num = Integer.MIN_VALUE;
+                        ce = CardEffect.Draw2;
+                        break;
+
+                    case 12:
+                    case 13:
+                        num = Integer.MIN_VALUE;
+                        ce = CardEffect.InvertOrder;
+                        break;
+
+                    case 14:
+                    case 15:
+                        num = Integer.MIN_VALUE;
+                        ce = CardEffect.Stop;
+                        break;
+
+                    default:
+                        ce = null;
+                        break;
+
+                }
+
+                deck.add(new Card(num, color, ce));
+
+            }
+
+        }
+
+        //Add 2 * 2 black special cards
+        for (int i = 0; i < 2; ++i) {
+
+            CardEffect ce;
+
+            if (i == 0) {
+
+                ce = CardEffect.ChangeColor;
+
+                for (int j = 0; j < 4; ++j) {
+
+                    deck.add(new Card(Integer.MIN_VALUE, Color.BLACK, ce));
+
+                }
+
+            } else {
+
+                ce = CardEffect.Draw4ChangeColor;
+
+                for (int j = 0; j < 2; ++j) {
+
+                    deck.add(new Card(Integer.MIN_VALUE, Color.BLACK, ce));
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private void startGame() {
+
+        System.out.println("Starting game");
+
+        fillDeck();
+
+        shuffleDeck();
+
+        createPlayers();
+
+        fillHands();
+
+        while (discard(1).getEffect() != null) {
+
+            System.out.println("Discarding a card");
+
+        }
+
+        currentColor = discarded.get(0).getColor();
+
+    }
+
+    private void fillHands() {
+
+        System.out.println("Filling the players' hands");
+
+        for (int i = 0; i < STARTING_CARDS_NUMBER * playersCount; ++i) {
+
+            draw(players[currentPlayer], 1);
+
+            nextPlayer();
+
+        }
+        
+        for (Hand player : players) {
+            
+            System.out.println("Player " + player.getName() + " has " + player.getCardsNumber() + " cards.");
+            
+        }
+
+    }
+
+    private void shuffleDeck() {
+
+        System.out.println("Shuffling the deck");
+        Random rand = new Random(System.nanoTime());
+
+        Collections.shuffle(deck, rand);
+
+    }
+
+    private void createPlayers() {
+
+        System.out.println("Adding the players to the game");
+
+        for (int i = 0; i < playersCount; ++i) {
+
+            players[i] = new Hand(new ArrayList<>(), "Player " + (i + 1));
+
+        }
+
+    }
+
+    private Card discard(int number) {
+
+        Card drew = new Card();
+
+        for (int i = 0; i < number; ++i) {
+
+            drew = deck.remove(deck.size() - 1);
+
+            discarded.add(0, drew);
+
+        }
+
+        return drew;
+
+    }
+
+    private void draw(Hand player, int number) {
+
+        //System.out.println("Player " + player.getName() + " is drawing a card");
+        for (int i = 0; i < number; ++i) {
+
+            Card drew = deck.remove(deck.size() - 1);
+
+            player.addCard(drew);
+
+        }
+
+    }
+
+    private void discardedToDeck() {
+
+        deck.clear();
+
+        for (int i = 0; i < discarded.size(); ++i) {
+
+            deck.add(discarded.get(discarded.size() - (i + 1)));
+
+        }
+
+        shuffleDeck();
+
+        discarded.clear();
+
+    }
+
+    private Hand checkWin() {
+
+        for (Hand player : players) {
+
+            if (player.getCards().isEmpty()) {
+
+                return player;
+
+            }
+
+        }
+
+        return null;
+
+    }
+
+    private void movePlayer(Hand player, Card card) {
+
+        System.out.println("Turn " + turns + ": Player " + player.getName() + " is playing a card");
+
+        if (player.getCards().contains(card)) {
+
+            player.removeCard(card);
+            discarded.add(0, card);
+            currentColor = card.getColor();
+
+            if (card.getEffect() != null) {
+
+                switch (card.getEffect()) {
+
+                    case ChangeColor:
+                        changeColor();
+                        break;
+
+                    case Draw2:
+                        draw(player, 2);
+                        break;
+
+                    case Draw4ChangeColor:
+                        draw(player, 4);
+                        changeColor();
+                        break;
+
+                    case InvertOrder:
+                        invertOrder();
+                        break;
+
+                    case Stop:
+                        nextPlayer();
+                        break;
+
+                }
+
+            }
+
+            nextPlayer();
+            ++turns;
+
+            Hand winPlayer = checkWin();
+
+            if (deck.isEmpty()) {
+
+                discardedToDeck();
+
+            }
+
+            if (winPlayer != null) {
+
+                winningPlayer = winPlayer;
+
+            }
+
+        }
+
+    }
+
+    public void movePlayer(Card card) {
+
+        System.out.println(currentPlayer);
+        movePlayer(players[currentPlayer], card);
+
+    }
+
+    private Card getPlayableCard(Hand player) {
+
+        List<Card> playables = new ArrayList<>();
+
+        for (Card card : player.getCards()) {
+
+            if (isCardPlayable(card)) {
+
+                playables.add(card);
+
+            }
+
+        }
+
+        if (playables.isEmpty()) {
+
+            return null;
+
+        }
+
+        Card playable = playables.get((int) (Math.random() * playables.size() - 1));
+        return playable;
+
+    }
+
+    public Card getPlayableCard() {
+
+        return getPlayableCard(players[currentPlayer]);
+
+    }
+
+    public boolean isCardPlayable(Card card) {
+
+        Card lastDiscarded = discarded.get(0);
+
+        boolean re = card.getColor().equals(currentColor)
+                || (card.getNumber() == lastDiscarded.getNumber() && card.getNumber() != Integer.MIN_VALUE)
+                || card.getColor().equals(Color.BLACK)
+                || (lastDiscarded.getEffect() != null && card.getEffect() != null && card.getEffect().equals(lastDiscarded.getEffect()));
+
+        return re;
+
+    }
+
+    private void nextPlayer() {
+
+        if (incrementalOrder) {
+
+            if (currentPlayer < playersCount - 2) {
+
+                ++currentPlayer;
+
+            } else {
+                
+                currentPlayer = 0;
+
+            }
+
+        } else {
+
+            if (currentPlayer > 0) {
+
+                --currentPlayer;
+
+            } else {
+
+                currentPlayer = playersCount - 1;
+
+            }
+
+        }
+
+    }
+
+    private void changeColor() {
+
+        boolean userInput = false;
+
+        while (userInput) {
+
+//            frame.add(waitForUserInput);
+//            frame.pack();
+//            frame.setVisible(true);
+            waitForUserInput.getThread().start();
+
+            try {
+
+                waitForUserInput.getThread().join();
+                currentColor = waitForUserInput.getChosenColor();
+                userInput = true;
+
+            } catch (InterruptedException ie) {
+
+            }
+
+        }
+
+        //frame.remove(waitForUserInput);
+
+    }
+
+    private void invertOrder() {
+        
+        incrementalOrder = !incrementalOrder;
+        
+    }
+
+}
