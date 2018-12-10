@@ -27,5 +27,29 @@ public enum CardEffect {
    ChangeColor,
    InvertOrder,
    Stop;
+
+    @Override
+    public String toString() {
+        
+       switch (this) {
+           
+           case ChangeColor:
+               return "ChangeColor";
+               
+           case Draw2:
+               return "Draw2";
+               
+           case Draw4ChangeColor:
+               return "Draw4ChangeColor";
+               
+           case InvertOrder:
+               return "InvertOrder";
+               
+           default:
+               return "Stop";
+               
+       }
+        
+    }
    
 }
