@@ -334,9 +334,9 @@ public class Game {
 
     private void movePlayer(Hand player, Card card) {
 
-        if (canPlay(player)) {
+        if (card != null && canPlay(player)) {
 
-            if (player.getCards().contains(card)) {
+            if (player.getCards().contains(card) && isCardPlayable(card)) {
 
                 System.out.println("Turn " + turns + ": Player " + player.getName() + " is playing a " + card);
 
