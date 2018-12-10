@@ -209,8 +209,6 @@ public class Game {
 
         shuffleDeck();
 
-        createPlayers();
-
         fillHands();
 
         while (discard(1).getEffect() != null) {
