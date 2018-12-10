@@ -480,54 +480,75 @@ public class Game {
 
             if (currentPlayer > 0) {
 
-                --currentPlayer;
+                newPlayer = currentPlayer - 1;
 
             } else {
 
-                currentPlayer = playersCount - 1;
+                newPlayer = playersCount - 1;
 
             }
 
         }
 
-        System.out.println("After: " + currentPlayer);
+        return newPlayer;
 
     }
 
     private void changeColor() {
 
-        boolean userInput = false;
+        int newColorIndex = (int) (Math.random() * 3);
 
-        while (userInput) {
+        switch (newColorIndex) {
 
-//            frame.add(waitForUserInput);
-//            frame.pack();
-//            frame.setVisible(true);
-            waitForUserInput.getThread().start();
+            case 0:
+                currentColor = Color.RED;
+                break;
 
-            try {
+            case 1:
+                currentColor = Color.BLUE;
+                break;
 
-                waitForUserInput.getThread().join();
-                currentColor = waitForUserInput.getChosenColor();
-                userInput = true;
+            case 2:
+                currentColor = Color.GREEN;
+                break;
 
-            } catch (InterruptedException ie) {
-
-            }
+            case 3:
+                currentColor = Color.YELLOW;
 
         }
 
-        //frame.remove(waitForUserInput);
+//
+//        boolean userInput = false;
+//
+//        while (userInput) {
+//
+//            frame.add(waitForUserInput);
+//            frame.pack();
+//            frame.setVisible(true);
+//            waitForUserInput.getThread().start();
+//
+//            try {
+//
+//                waitForUserInput.getThread().join();
+//                currentColor = waitForUserInput.getChosenColor();
+//                userInput = true;
+//
+//            } catch (InterruptedException ie) {
+//
+//            }
+//
+//        }
+//
+//        frame.remove(waitForUserInput);
     }
 
     private void invertOrder() {
 
-        System.out.println("Invert");
         incrementalOrder = !incrementalOrder;
 
     }
 
-    private boolean canPlay(Hand player) {
+    public boolean canPlay(Hand player) {
 
         boolean canPlay = false;
 
