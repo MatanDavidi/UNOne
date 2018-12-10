@@ -244,15 +244,15 @@ public class Game {
 
     }
 
-    private void createPlayers() {
+    public boolean addPlayer(Hand player) {
 
-        System.out.println("Adding the players to the game");
-
-        for (int i = 0; i < playersCount; ++i) {
-
-            players[i] = new Hand(new ArrayList<>(), "Player " + (i + 1));
-
+        if (players.size() <= playersCount) {
+         
+            return players.add(player);
+            
         }
+        
+        return false;
 
     }
 
