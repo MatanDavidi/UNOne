@@ -35,7 +35,7 @@ public class Game {
 
     private int playersCount;
 
-    private final Hand[] players;
+    private final List<Hand> players;
 
     private int turns;
 
@@ -89,7 +89,7 @@ public class Game {
         setPlayersCount(playersCount);
         this.deck = new ArrayList<>();
         this.discarded = new ArrayList<>();
-        this.players = new Hand[this.playersCount];
+        this.players = new ArrayList<Hand>(playersCount);
         turns = 0;
         currentPlayer = (int) (Math.random() * 3);
         winningPlayer = null;
@@ -229,7 +229,7 @@ public class Game {
 
         for (int i = 0; i < STARTING_CARDS_NUMBER * playersCount; ++i) {
 
-            draw(players[currentPlayer], 1);
+            draw(players.get(currentPlayer), 1);
 
             nextPlayer();
 
@@ -278,7 +278,6 @@ public class Game {
 
     private void draw(Hand player, int number) {
 
-        //System.out.println("Player " + player.getName() + " is drawing a card");
         for (int i = 0; i < number; ++i) {
 
             if (deck.size() > 0) {
@@ -352,11 +351,11 @@ public class Game {
                             break;
 
                         case Draw2:
-                            draw(player, 2);
+                            draw(players.get(getNextPlayerIndex()), 2);
                             break;
 
                         case Draw4ChangeColor:
-                            draw(player, 4);
+                            draw(players.get(getNextPlayerIndex()), 4);
                             changeColor();
                             break;
 
@@ -402,8 +401,7 @@ public class Game {
 
     public void movePlayer(Card card) {
 
-        //System.out.println(currentPlayer);
-        movePlayer(players[currentPlayer], card);
+        movePlayer(players.get(currentPlayer), card);
 
     }
 
@@ -434,7 +432,7 @@ public class Game {
 
     public Card getPlayableCard() {
 
-        return getPlayableCard(players[currentPlayer]);
+        return getPlayableCard(players.get(currentPlayer));
 
     }
 
