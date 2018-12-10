@@ -373,29 +373,32 @@ public class Game {
 
                 }
 
-                System.out.println("next player");
-                nextPlayer();
-                ++turns;
-
-                Hand winPlayer = checkWin();
-
-                if (deck.isEmpty()) {
-
-                    discardedToDeck();
-
-                }
-
-                if (winPlayer != null) {
-
-                    winningPlayer = winPlayer;
-
-                }
-
             }
 
         } else {
 
+            System.out.println("Player " + player.getName() + " has run out of playable cards and has to draw a card from the deck");
             draw(player, 1);
+            nextPlayer();
+
+        }
+
+        int handsCards = 0;
+
+        ++turns;
+        nextPlayer();
+
+        Hand winPlayer = checkWin();
+
+        if (deck.isEmpty()) {
+
+            discardedToDeck();
+
+        }
+
+        if (winPlayer != null) {
+
+            winningPlayer = winPlayer;
 
         }
 
