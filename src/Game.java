@@ -279,9 +279,17 @@ public class Game {
         //System.out.println("Player " + player.getName() + " is drawing a card");
         for (int i = 0; i < number; ++i) {
 
-            Card drew = deck.remove(deck.size() - 1);
+            if (deck.size() > 0) {
 
-            player.addCard(drew);
+                Card drew = deck.remove(deck.size() - 1);
+
+                player.addCard(drew);
+
+            } else {
+                
+                discardedToDeck();
+                
+            }
 
         }
 
@@ -320,7 +328,7 @@ public class Game {
     }
 
     private void movePlayer(Hand player, Card card) {
-        
+
         if (canPlay(player)) {
 
             if (player.getCards().contains(card)) {
@@ -381,9 +389,9 @@ public class Game {
             }
 
         } else {
-            
+
             draw(player, 1);
-            
+
         }
 
     }
@@ -508,22 +516,22 @@ public class Game {
     }
 
     private boolean canPlay(Hand player) {
-        
+
         boolean canPlay = false;
-        
+
         for (Card card : player.getCards()) {
-            
+
             if (isCardPlayable(card)) {
-                
+
                 canPlay = true;
                 break;
-                
+
             }
-            
+
         }
-        
+
         return canPlay;
-        
+
     }
 
 }
