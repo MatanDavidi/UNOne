@@ -49,7 +49,7 @@ public class Game {
 
     private boolean incrementalOrder = true;
 
-    private UserInputThreadPanel waitForUserInput;
+    private ChangeColorFrame changeColorFrame;
 
     //private UNOFrame frame;
     public int getPlayersCount() {
@@ -89,12 +89,12 @@ public class Game {
         setPlayersCount(playersCount);
         this.deck = new ArrayList<>();
         this.discarded = new ArrayList<>();
-        this.players = new ArrayList<Hand>(playersCount);
+        this.players = new ArrayList<>(playersCount);
         turns = 0;
         currentPlayer = (int) (Math.random() * 3);
         winningPlayer = null;
-        waitForUserInput = new UserInputThreadPanel();
-        //frame = new UNOFrame();
+        changeColorFrame = new ChangeColorFrame(this);
+        changeColorFrame.setVisible(false);
 
         startGame();
 
@@ -562,6 +562,12 @@ public class Game {
         }
 
         return canPlay;
+
+    }
+
+    void setCurrentColor(Color currentColor) {
+
+        this.currentColor = currentColor;
 
     }
 
