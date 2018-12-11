@@ -494,50 +494,47 @@ public class Game {
 
     private void changeColor() {
 
-        int newColorIndex = (int) (Math.random() * 3);
-
-        switch (newColorIndex) {
-
-            case 0:
-                currentColor = Color.RED;
-                break;
-
-            case 1:
-                currentColor = Color.BLUE;
-                break;
-
-            case 2:
-                currentColor = Color.GREEN;
-                break;
-
-            case 3:
-                currentColor = Color.YELLOW;
-
-        }
-
+//        int newColorIndex = (int) (Math.random() * 3);
 //
-//        boolean userInput = false;
+//        switch (newColorIndex) {
 //
-//        while (userInput) {
+//            case 0:
+//                currentColor = Color.RED;
+//                break;
 //
-//            frame.add(waitForUserInput);
-//            frame.pack();
-//            frame.setVisible(true);
-//            waitForUserInput.getThread().start();
+//            case 1:
+//                currentColor = Color.BLUE;
+//                break;
 //
-//            try {
+//            case 2:
+//                currentColor = Color.GREEN;
+//                break;
 //
-//                waitForUserInput.getThread().join();
-//                currentColor = waitForUserInput.getChosenColor();
-//                userInput = true;
-//
-//            } catch (InterruptedException ie) {
-//
-//            }
+//            case 3:
+//                currentColor = Color.YELLOW;
 //
 //        }
 //
-//        frame.remove(waitForUserInput);
+        boolean userInput = false;
+
+        changeColorFrame.setVisible(true);
+
+        while (userInput) {
+
+            changeColorFrame.mainThread.start();
+
+            try {
+
+                changeColorFrame.mainThread.join();
+                userInput = true;
+
+            } catch (InterruptedException ie) {
+
+            }
+
+        }
+
+        changeColorFrame.setVisible(false);
     }
 
     private void invertOrder() {
