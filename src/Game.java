@@ -38,7 +38,7 @@ public class Game implements MouseListener {
 
     private int playersCount;
 
-    private final List<Hand> players;
+    public final List<Hand> players;
 
     private int turns;
 
@@ -343,7 +343,7 @@ public class Game implements MouseListener {
 
     }
 
-    private void movePlayer(Hand player, Card card) {
+    public void movePlayer(Hand player, Card card) {
 
         if (card != null && canPlay(player)) {
 
