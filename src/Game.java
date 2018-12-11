@@ -249,13 +249,21 @@ public class Game implements MouseListener {
 
     public boolean addPlayer(Hand player) {
 
-        if (players.size() <= playersCount) {
-         
-            return players.add(player);
-            
+        boolean re = false;
+
+        if (players.size() + 1 <= playersCount) {
+
+            re = players.add(player);
+
         }
-        
-        return false;
+
+        if (players.size() == playersCount) {
+
+            fillHands();
+
+        }
+
+        return re;
 
     }
 
