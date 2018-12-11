@@ -1,9 +1,12 @@
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import javax.swing.JButton;
 
 /*
  * Copyright (C) 2018 Matan Davidi
@@ -27,7 +30,7 @@ import java.util.Random;
  * @author Matan Davidi
  * @version 3-dic-2018
  */
-public class Game {
+public class Game implements MouseListener {
 
     private final List<Card> deck;
 
@@ -565,6 +568,67 @@ public class Game {
     void setCurrentColor(Color currentColor) {
 
         this.currentColor = currentColor;
+        
+        if (changeColorFrame.isVisible()) {
+
+            changeColorFrame.setVisible(false);
+
+        }
+        
+        System.out.println("The color was changed");
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+        System.out.println("ad");
+        
+        if (e.getComponent() instanceof JButton) {
+
+            JButton component = (JButton) e.getComponent();
+
+            switch (component.getText()) {
+
+                case "RED":
+                    setCurrentColor(Color.RED);
+                    break;
+
+                case "GREEN":
+                    setCurrentColor(Color.GREEN);
+                    break;
+
+                case "BLUE":
+                    setCurrentColor(Color.BLUE);
+                    break;
+
+                case "YELLOW":
+                    setCurrentColor(Color.YELLOW);
+                    break;
+
+            }
+
+        }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 
