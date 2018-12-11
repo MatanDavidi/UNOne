@@ -226,7 +226,7 @@ public class Game implements MouseListener {
 
     private void fillHands() {
 
-        System.out.println("Filling the players' hands");
+        System.out.println("Filling the " + players.size() + " players' hands");
 
         for (int i = 0; i < STARTING_CARDS_NUMBER * playersCount; ++i) {
 
