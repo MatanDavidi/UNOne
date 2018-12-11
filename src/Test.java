@@ -1,7 +1,7 @@
 
+import java.awt.Color;
 import java.util.ArrayList;
-
-
+import java.util.List;
 
 /*
  * Copyright (C) 2018 Matan Davidi
@@ -28,26 +28,35 @@ import java.util.ArrayList;
 public class Test {
 
     private static Game g;
-    
+
     public static void main(String[] args) {
 
         g = new Game(4);
-        
+
         createPlayers();
 
-        do {
+//        do {
+//
+//            g.movePlayer(g.getPlayableCard());
+//
+//        } while (g.getWinningPlayer() == null);
+//
+//        System.out.println("The winner is " + g.getWinningPlayer().getName() + "!");
+        g.movePlayer(g.players.get(0), g.players.get(0).getCards().get(0));
 
-            g.movePlayer(g.getPlayableCard());
-
-        } while (g.getWinningPlayer() == null);
-
-        System.out.println("The winner is " + g.getWinningPlayer().getName() + "!");
     }
-    
+
     private static void createPlayers() {
 
-        System.out.println("Adding the players to the game");
+        System.out.println("Adding the " + g.getPlayersCount() + " players to the game");
 
+        List<Card> hand = new ArrayList<>();
+        hand.add(new Card(Integer.MIN_VALUE, Color.BLACK, CardEffect.ChangeColor));
+        hand.add(new Card(Integer.MIN_VALUE, Color.BLACK, CardEffect.ChangeColor));
+
+        Hand testPlayer = new Hand(hand, "test");
+
+        g.addPlayer(testPlayer);
         for (int i = 0; i < g.getPlayersCount(); ++i) {
 
             g.addPlayer(new Hand(new ArrayList<>(), "Player " + (i + 1)));
