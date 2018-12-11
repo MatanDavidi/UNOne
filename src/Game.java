@@ -518,26 +518,7 @@ public class Game implements MouseListener {
 //
 //        }
 //
-        boolean userInput = false;
-
         changeColorFrame.setVisible(true);
-
-        while (userInput) {
-
-            changeColorFrame.mainThread.start();
-
-            try {
-
-                changeColorFrame.mainThread.join();
-                userInput = true;
-
-            } catch (InterruptedException ie) {
-
-            }
-
-        }
-
-        changeColorFrame.setVisible(false);
     }
 
     private void invertOrder() {
