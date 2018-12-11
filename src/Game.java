@@ -382,14 +382,12 @@ public class Game implements MouseListener {
 
             System.out.println("Player " + player.getName() + " has run out of playable cards and has to draw a card from the deck");
             draw(player, 1);
-            nextPlayer();
 
         }
 
         ++turns;
-        nextPlayer();
-
         Hand winPlayer = checkWin();
+        nextPlayer();
 
         if (deck.isEmpty()) {
 
