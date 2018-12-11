@@ -212,8 +212,6 @@ public class Game implements MouseListener {
 
         shuffleDeck();
 
-        fillHands();
-
         while (discard(1).getEffect() != null) {
 
             System.out.println("Discarding a card");
