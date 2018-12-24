@@ -165,38 +165,30 @@ public class Game {
 
                 }
 
+                //If the card is not a 0, insert it twice
+                if (j >= 1 && j <= 15) {
+
+                    deck.add(new Card(num, color, ce));
+
+                }
+
                 deck.add(new Card(num, color, ce));
 
             }
 
         }
 
-        //Add 2 * 2 black special cards
-        for (int i = 0; i < 2; ++i) {
+        //Add 4 change color cards
+        for (int j = 0; j < 4; ++j) {
 
-            CardEffect ce;
+            deck.add(new Card(Integer.MIN_VALUE, Color.BLACK, CardEffect.ChangeColor));
 
-            if (i == 0) {
+        }
 
-                ce = CardEffect.ChangeColor;
+        //Add 4 draw 4 change color cards
+        for (int j = 0; j < 4; ++j) {
 
-                for (int j = 0; j < 4; ++j) {
-
-                    deck.add(new Card(Integer.MIN_VALUE, Color.BLACK, ce));
-
-                }
-
-            } else {
-
-                ce = CardEffect.Draw4ChangeColor;
-
-                for (int j = 0; j < 2; ++j) {
-
-                    deck.add(new Card(Integer.MIN_VALUE, Color.BLACK, ce));
-
-                }
-
-            }
+            deck.add(new Card(Integer.MIN_VALUE, Color.BLACK, CardEffect.Draw4ChangeColor));
 
         }
 
@@ -500,14 +492,14 @@ public class Game {
     private void changeColor() {
 
         Object[] options = {"RED", "GREEN", "BLUE", "YELLOW"};
-        
+
         int userInput = JOptionPane.CLOSED_OPTION;
-        
+
         while (userInput == JOptionPane.CLOSED_OPTION) {
 
             userInput = JOptionPane.showOptionDialog(
-                    parentContainer, "Please select a color", "Color change", 
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                    parentContainer, "Please select a color", "Color change",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
                     null, options, options[0]);
 
         }
