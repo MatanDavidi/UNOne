@@ -24,12 +24,11 @@ import javax.swing.JButton;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
  * @author Matan Davidi
  * @version 3-dic-2018
  */
-public class Game implements MouseListener {
+public class Game {
 
     private final List<Card> deck;
 
@@ -544,70 +543,30 @@ public class Game implements MouseListener {
 
     }
 
-    void setCurrentColor(Color currentColor) {
+    private Color stringToColor(String value) {
+
+        Color re;
+
+        try {
+
+            Field field = Class.forName("java.awt.Color").getField(value);
+            re = (Color) field.get(null);
+
+        } catch (Exception e) {
+
+            re = null; // Not defined
+
+        }
+
+        return re;
+
+    }
+
+    private void setCurrentColor(Color currentColor) {
 
         this.currentColor = currentColor;
 
-        if (changeColorFrame.isVisible()) {
-
-            changeColorFrame.setVisible(false);
-
-        }
-
         System.out.println("The color was changed");
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-        System.out.println("ad");
-
-        if (e.getComponent() instanceof JButton) {
-
-            JButton component = (JButton) e.getComponent();
-
-            switch (component.getText()) {
-
-                case "RED":
-                    setCurrentColor(Color.RED);
-                    break;
-
-                case "GREEN":
-                    setCurrentColor(Color.GREEN);
-                    break;
-
-                case "BLUE":
-                    setCurrentColor(Color.BLUE);
-                    break;
-
-                case "YELLOW":
-                    setCurrentColor(Color.YELLOW);
-                    break;
-
-            }
-
-        }
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
 
     }
 
