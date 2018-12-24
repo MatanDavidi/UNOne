@@ -20,7 +20,7 @@
  * @author Matan Davidi
  */
 public class UNOForm extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form UNOForm
      */
@@ -37,64 +37,20 @@ public class UNOForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        playerOnePanel = new javax.swing.JPanel();
-        playerTwoPanel = new javax.swing.JPanel();
-        playerThreePanel = new javax.swing.JPanel();
-        playerFourPanel = new javax.swing.JPanel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout playerOnePanelLayout = new javax.swing.GroupLayout(playerOnePanel);
-        playerOnePanel.setLayout(playerOnePanelLayout);
-        playerOnePanelLayout.setHorizontalGroup(
-            playerOnePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout gameLayout = new javax.swing.GroupLayout(game);
+        game.setLayout(gameLayout);
+        gameLayout.setHorizontalGroup(
+            gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
-        playerOnePanelLayout.setVerticalGroup(
-            playerOnePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        gameLayout.setVerticalGroup(
+            gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        getContentPane().add(playerOnePanel, java.awt.BorderLayout.PAGE_END);
-
-        javax.swing.GroupLayout playerTwoPanelLayout = new javax.swing.GroupLayout(playerTwoPanel);
-        playerTwoPanel.setLayout(playerTwoPanelLayout);
-        playerTwoPanelLayout.setHorizontalGroup(
-            playerTwoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        playerTwoPanelLayout.setVerticalGroup(
-            playerTwoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(playerTwoPanel, java.awt.BorderLayout.PAGE_START);
-
-        javax.swing.GroupLayout playerThreePanelLayout = new javax.swing.GroupLayout(playerThreePanel);
-        playerThreePanel.setLayout(playerThreePanelLayout);
-        playerThreePanelLayout.setHorizontalGroup(
-            playerThreePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        playerThreePanelLayout.setVerticalGroup(
-            playerThreePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(playerThreePanel, java.awt.BorderLayout.LINE_START);
-
-        javax.swing.GroupLayout playerFourPanelLayout = new javax.swing.GroupLayout(playerFourPanel);
-        playerFourPanel.setLayout(playerFourPanelLayout);
-        playerFourPanelLayout.setHorizontalGroup(
-            playerFourPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        playerFourPanelLayout.setVerticalGroup(
-            playerFourPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(playerFourPanel, java.awt.BorderLayout.LINE_END);
+        getContentPane().add(game, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,9 +91,6 @@ public class UNOForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel playerFourPanel;
-    private javax.swing.JPanel playerOnePanel;
-    private javax.swing.JPanel playerThreePanel;
-    private javax.swing.JPanel playerTwoPanel;
+    private final Game game = new Game(2, this);
     // End of variables declaration//GEN-END:variables
 }
