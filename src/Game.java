@@ -543,6 +543,16 @@ public class Game {
 
     }
 
+    /**
+     * Converts a String representation of a color into an object of class
+     * Color. Taken directly from
+     * https://stackoverflow.com/questions/2854043/converting-a-string-to-color-in-java
+     * Thanks ZZ Coder and Erick Robertson
+     *
+     * @param value the String to convert to an instance of class Color
+     * @return an instance of class Color representing the Color whose name is
+     * contained in the String parameter 'value'
+     */
     private Color stringToColor(String value) {
 
         Color re;
