@@ -132,61 +132,65 @@ public class Game {
 
             }
 
-            //Add numerical cards (0-9) and special cards (10-15)
-            for (int j = 0; j < 16; ++j) {
+            //Add numerical cards (0-9) and special cards (10-12)
+            for (int j = 0; j < 13; ++j) {
 
-                int num = j;
+                int num;
 
                 CardEffect ce;
 
                 switch (j) {
 
                     case 10:
-                    case 11:
                         num = Integer.MIN_VALUE;
                         ce = CardEffect.Draw2;
                         break;
 
-                    case 12:
-                    case 13:
+                    case 11:
                         num = Integer.MIN_VALUE;
                         ce = CardEffect.InvertOrder;
                         break;
 
-                    case 14:
-                    case 15:
+                    case 12:
                         num = Integer.MIN_VALUE;
                         ce = CardEffect.Stop;
                         break;
 
                     default:
+                        num = j;
                         ce = null;
                         break;
 
                 }
 
                 //If the card is not a 0, insert it twice
-                if (j >= 1 && j <= 15) {
+                if (num == 0) {
 
                     deck.add(new Card(num, color, ce));
 
-                }
+                } else {
 
-                deck.add(new Card(num, color, ce));
+                    for (int k = 0; k < 2; ++k) {
+
+                        deck.add(new Card(num, color, ce));
+
+                    }
+
+                }
 
             }
 
         }
 
         //Add 4 change color cards
-        for (int j = 0; j < 4; ++j) {
+        for (int i = 0; i < 4; ++i) {
 
             deck.add(new Card(Integer.MIN_VALUE, Color.BLACK, CardEffect.ChangeColor));
 
         }
 
         //Add 4 draw 4 change color cards
-        for (int j = 0; j < 4; ++j) {
+        for (int i = 0; i < 4; ++i) {
 
             deck.add(new Card(Integer.MIN_VALUE, Color.BLACK, CardEffect.Draw4ChangeColor));
 
@@ -199,6 +203,8 @@ public class Game {
         System.out.println("Starting game");
 
         fillDeck();
+
+        System.out.println("Deck size: " + deck.size());
 
         shuffleDeck();
 
