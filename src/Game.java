@@ -50,7 +50,7 @@ public class Game {
 
     private boolean incrementalOrder = true;
 
-    private ChangeColorFrame changeColorFrame;
+    private final Frame parentContainer;
 
     //private UNOFrame frame;
     public int getPlayersCount() {
@@ -84,8 +84,9 @@ public class Game {
      * Creates a new game
      *
      * @param playersCount the number of players that will be playing
+     * @param parentContainer the container that contains the game
      */
-    public Game(int playersCount) {
+    public Game(int playersCount, Frame parentContainer) {
 
         setPlayersCount(playersCount);
         this.deck = new ArrayList<>();
@@ -94,8 +95,7 @@ public class Game {
         turns = 0;
         currentPlayer = (int) (Math.random() * 3);
         winningPlayer = null;
-        changeColorFrame = new ChangeColorFrame(this);
-        changeColorFrame.setVisible(false);
+        this.parentContainer = parentContainer;
 
         startGame();
 
