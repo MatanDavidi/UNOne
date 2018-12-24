@@ -501,28 +501,28 @@ public class Game implements MouseListener {
 
     private void changeColor() {
 
-//        int newColorIndex = (int) (Math.random() * 3);
-//
-//        switch (newColorIndex) {
-//
-//            case 0:
-//                currentColor = Color.RED;
-//                break;
-//
-//            case 1:
-//                currentColor = Color.BLUE;
-//                break;
-//
-//            case 2:
-//                currentColor = Color.GREEN;
-//                break;
-//
-//            case 3:
-//                currentColor = Color.YELLOW;
-//
-//        }
-//
-        changeColorFrame.setVisible(true);
+        int newColorIndex = (int) (Math.random() * 3);
+
+        switch (newColorIndex) {
+
+            case 0:
+                currentColor = Color.RED;
+                break;
+
+            case 1:
+                currentColor = Color.BLUE;
+                break;
+
+            case 2:
+                currentColor = Color.GREEN;
+                break;
+
+            case 3:
+                currentColor = Color.YELLOW;
+
+        }
+
+        //changeColorFrame.setVisible(true);
     }
 
     private void invertOrder() {
