@@ -95,6 +95,7 @@ public class Card {
     @Override
     public String toString() {
 
+        String re = "";
         String colorString;
         
         if (color.equals(Color.YELLOW)) {
@@ -119,7 +120,21 @@ public class Card {
             
         }
         
-        return (colorString + " " + number + " with a " + effect + " effect");
+        re += colorString;
+        
+        if (number >= 0 && number <= 9) {
+            
+           re += number;
+            
+        }
+        
+        if (effect != null) {
+            
+            re += effect;
+            
+        }
+        
+        return re;
 
     }
 
