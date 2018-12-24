@@ -500,28 +500,23 @@ public class Game implements MouseListener {
 
     private void changeColor() {
 
-        int newColorIndex = (int) (Math.random() * 3);
+        Object[] options = {"RED", "GREEN", "BLUE", "YELLOW"};
+        
+        int userInput = JOptionPane.CLOSED_OPTION;
+        
+        while (userInput == JOptionPane.CLOSED_OPTION) {
 
-        switch (newColorIndex) {
-
-            case 0:
-                currentColor = Color.RED;
-                break;
-
-            case 1:
-                currentColor = Color.BLUE;
-                break;
-
-            case 2:
-                currentColor = Color.GREEN;
-                break;
-
-            case 3:
-                currentColor = Color.YELLOW;
+            userInput = JOptionPane.showOptionDialog(
+                    parentContainer, "Please select a color", "Color change", 
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                    null, options, options[0]);
 
         }
 
-        //changeColorFrame.setVisible(true);
+        Color newColor = stringToColor((String) options[userInput]);
+
+        setCurrentColor(newColor);
+
     }
 
     private void invertOrder() {
