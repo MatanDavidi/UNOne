@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 
 /*
  * Copyright (C) 2018 Matan Davidi
@@ -30,7 +31,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        g = new Game(4);
+        g = new Game(4, new JFrame());
 
         createPlayers();
 
