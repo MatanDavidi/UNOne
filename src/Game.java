@@ -25,8 +25,7 @@ import javax.swing.JButton;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- /* 
- *
+/**
  * @author Matan Davidi
  * @version 3-dic-2018
  */
@@ -294,9 +293,9 @@ public class Game implements MouseListener {
                 player.addCard(drew);
 
             } else {
-                
+
                 discardedToDeck();
-                
+
             }
 
         }
@@ -553,13 +552,13 @@ public class Game implements MouseListener {
     void setCurrentColor(Color currentColor) {
 
         this.currentColor = currentColor;
-        
+
         if (changeColorFrame.isVisible()) {
 
             changeColorFrame.setVisible(false);
 
         }
-        
+
         System.out.println("The color was changed");
 
     }
@@ -568,7 +567,7 @@ public class Game implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         System.out.println("ad");
-        
+
         if (e.getComponent() instanceof JButton) {
 
             JButton component = (JButton) e.getComponent();

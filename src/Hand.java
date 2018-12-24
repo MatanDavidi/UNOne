@@ -19,13 +19,12 @@ import java.util.List;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- /* 
- *
+/**
  * @author Matan Davidi
  * @version 03 December 2018
  */
 public class Hand {
-    
+
     private String name;
 
     private List<Card> cards;
