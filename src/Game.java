@@ -68,7 +68,7 @@ public class Game {
         this.discarded = new ArrayList<>();
         this.players = new ArrayList<>(playersCount);
         turns = 0;
-        currentPlayer = (int) (Math.random() * 3);
+        currentPlayer = (int) (Math.random() * playersCount);
         winningPlayer = null;
         this.parentContainer = parentContainer;
         listeners = new ArrayList();
