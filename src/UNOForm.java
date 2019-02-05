@@ -20,7 +20,7 @@
  * @author Matan Davidi
  */
 public class UNOForm extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form UNOForm
      */
