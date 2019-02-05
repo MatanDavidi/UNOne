@@ -95,6 +95,13 @@ public class Game {
 
         }
 
+    }
+
+    public Hand getWinningPlayer() {
+
+        return winningPlayer;
+
+    }
 
     private void fillDeck() {
 
