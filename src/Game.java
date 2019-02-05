@@ -292,15 +292,14 @@ public class Game {
 
         for (int i = 0; i < number; ++i) {
 
-            if (deck.size() > 0) {
-
-                Card drew = deck.remove(deck.size() - 1);
-
-                player.addCard(drew);
-
-            } else {
+            if (deck.isEmpty()) {
 
                 discardedToDeck();
+
+            }
+
+            Card drew = deck.remove(deck.size() - 1);
+
             for (UNOListener listener : listeners) {
 
                 listener.cardAdded(drew, players.indexOf(player));
