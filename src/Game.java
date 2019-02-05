@@ -71,6 +71,7 @@ public class Game {
         currentPlayer = (int) (Math.random() * 3);
         winningPlayer = null;
         this.parentContainer = parentContainer;
+        listeners = new ArrayList();
 
         startGame();
 
@@ -262,6 +263,12 @@ public class Game {
         return re;
 
     }
+    
+    public void addUnoListener(UNOListener listener) {
+        
+        listeners.add(listener);
+        
+    }
 
     private Card discard(int number) {
 
@@ -294,6 +301,9 @@ public class Game {
             } else {
 
                 discardedToDeck();
+            for (UNOListener listener : listeners) {
+
+                listener.cardAdded(drew, players.indexOf(player));
 
             }
 
