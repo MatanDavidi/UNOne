@@ -226,7 +226,7 @@ public class Game {
 
         for (int i = 0; i < STARTING_CARDS_NUMBER * playersCount; ++i) {
 
-            draw(players.get(currentPlayer), 1);
+            draw(1);
 
             nextPlayer();
 
