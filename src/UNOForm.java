@@ -91,6 +91,6 @@ public class UNOForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private final Game game = new Game(2, this);
+    private GamePanel mainGamePanel;
     // End of variables declaration//GEN-END:variables
 }
