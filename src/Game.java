@@ -581,7 +581,7 @@ public class Game {
             Field field = Class.forName("java.awt.Color").getField(value);
             re = (Color) field.get(null);
 
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException e) {
 
             re = null; // Not defined
 
