@@ -515,22 +515,26 @@ public class Game {
 
     private void changeColor() {
 
-        Object[] options = {"RED", "GREEN", "BLUE", "YELLOW"};
+        if (currentPlayer == 0) {
 
-        int userInput = JOptionPane.CLOSED_OPTION;
+            Object[] options = {"RED", "GREEN", "BLUE", "YELLOW"};
 
-        while (userInput == JOptionPane.CLOSED_OPTION) {
-            
-            userInput = JOptionPane.showOptionDialog(
-                    parentContainer, "Please select a color", "Color change",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
-                    null, options, options[0]);
+            int userInput = JOptionPane.CLOSED_OPTION;
+
+            while (userInput == JOptionPane.CLOSED_OPTION) {
+
+                userInput = JOptionPane.showOptionDialog(
+                        parentContainer, "Please select a color", "Color change",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+                        null, options, options[0]);
+
+            }
+
+            Color newColor = stringToColor((String) options[userInput]);
+
+            setCurrentColor(newColor);
 
         }
-
-        Color newColor = stringToColor((String) options[userInput]);
-
-        setCurrentColor(newColor);
 
     }
 
