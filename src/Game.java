@@ -1,13 +1,11 @@
 
 import java.awt.Color;
-import java.awt.Frame;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /*
  * Copyright (C) 2018 Matan Davidi
