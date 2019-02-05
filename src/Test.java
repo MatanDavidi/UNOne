@@ -30,7 +30,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        g = new Game(4, new JFrame());
+        g = new Game(4, new GamePanel());
 
         createPlayers();
 
