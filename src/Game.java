@@ -61,7 +61,7 @@ public class Game {
      * @param playersCount the number of players that will be playing
      * @param parentContainer the container that contains the game
      */
-    public Game(int playersCount, Frame parentContainer) {
+    public Game(int playersCount, GamePanel parentContainer) {
 
         setPlayersCount(playersCount);
         this.deck = new ArrayList<>();
