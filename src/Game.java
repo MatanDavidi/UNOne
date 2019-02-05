@@ -306,6 +306,8 @@ public class Game {
 
             }
 
+            player.addCard(drew);
+
         }
 
     }
