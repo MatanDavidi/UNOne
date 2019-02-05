@@ -38,20 +38,10 @@ public class UNOForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mainGamePanel = new GamePanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout gameLayout = new javax.swing.GroupLayout(game);
-        game.setLayout(gameLayout);
-        gameLayout.setHorizontalGroup(
-            gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        gameLayout.setVerticalGroup(
-            gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(game, java.awt.BorderLayout.CENTER);
+        getContentPane().add(mainGamePanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
