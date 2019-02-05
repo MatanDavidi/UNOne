@@ -53,7 +53,7 @@ public class Game {
 
     private List<UNOListener> listeners;
 
-    private GamePanel parentCointainer;
+    private GamePanel parentContainer;
 
     /**
      * Creates a new game
