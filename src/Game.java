@@ -51,35 +51,9 @@ public class Game {
 
     private boolean incrementalOrder = true;
 
-    private final Frame parentContainer;
+    private List<UNOListener> listeners;
 
-    //private UNOFrame frame;
-    public int getPlayersCount() {
-
-        return playersCount;
-
-    }
-
-    private void setPlayersCount(int playersCount) {
-
-        if (playersCount > 1) {
-
-            System.out.println("Setting players count to " + playersCount);
-            this.playersCount = playersCount;
-
-        } else {
-
-            this.playersCount = 2;
-
-        }
-
-    }
-
-    public Hand getWinningPlayer() {
-
-        return winningPlayer;
-
-    }
+    private GamePanel parentCointainer;
 
     /**
      * Creates a new game
