@@ -311,6 +311,12 @@ public class Game {
 
     }
 
+    public void draw(int number) {
+
+        draw(players.get(currentPlayer), number);
+
+    }
+
     private void discardedToDeck() {
 
         if (deck.isEmpty() && !discarded.isEmpty()) {
