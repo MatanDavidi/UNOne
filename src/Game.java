@@ -576,7 +576,7 @@ public class Game {
 
         this.currentColor = currentColor;
 
-        System.out.println("The color was changed");
+        System.out.println("The color was changed to " + currentColor);
 
     }
 
