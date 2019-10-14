@@ -9,7 +9,7 @@
  * @author Matan Davidi
  */
 public interface UNOListener {
-    
+
     public void cardAdded(Card source, int playerIndex);
-    
+
 }
